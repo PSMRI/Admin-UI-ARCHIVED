@@ -3,15 +3,9 @@ name: Package-prod
 on:
   push:
     branches: [ "master"]
-    paths-ignore:
-     - target/**
-     - dist/**
      
   pull_request:
-     branches: [ "master" ]
-     paths-ignore:
-     - target/**
-     - dist/**
+     branches: [ "master"]
 
 jobs:
   Package:
