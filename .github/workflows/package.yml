@@ -2,21 +2,19 @@ name: Package
 
 on:
   push:
-    branches:
-      - develop
+    branches: [ "develop"]
     paths-ignore:
-      - 'target/**'
-      - 'dist/**'
-      
+     - target/**
+     - dist/**
+     
   pull_request:
-    branches:
-      - develop
-    paths-ignore:
-      - 'target/**'
-      - 'dist/**'
+     branches: [ "develop" ]
+     paths-ignore:
+     - target/**
+     - dist/**
 
 jobs:
-  build:
+  Package:
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -28,6 +26,7 @@ jobs:
         uses: actions/setup-java@v2
         with:
           java-version: '8'
+          distribution: 'adopt'
 
       - name: Set up Node.js
         uses: actions/setup-node@v2
