@@ -2,11 +2,16 @@ name: "CodeQL"
 
 on:
   push:
-    branches: [ "develop" ]
+    branches: [ "develop"]
+    paths-ignore:
+     - target/**
+     - dist/**
+     
   pull_request:
-    # The branches below must be a subset of the branches above
-    branches: [ "develop" ]
-
+     branches: [ "develop" ]
+     paths-ignore:
+     - target/**
+     - dist/**
 jobs:
   analyze:
     name: Analyze
@@ -44,12 +49,13 @@ jobs:
       with:
           node-version: 14
           
-    - name: Build with NPM and Maven
+    - name: Build with NPM
       run: |
-            npm install -g @angular/cli
-            npm install typescript@2.7.2 --save-dev
-            npm install
-            npm run build
+          npm install -g @angular/cli
+          npm install typescript@2.7.2 --save-dev
+          npm install
+          npm run build
+          npm run ng build --prod
        
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v2
