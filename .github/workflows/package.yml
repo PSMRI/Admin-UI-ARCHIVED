@@ -31,21 +31,21 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '16'
+          node-version: '14'
 
-      - name: Build with NPM and Create WAR file
+      - name: Build with NPM
         run: |
-          npm config set legacy-peer-deps true
           npm install -g @angular/cli
-          npm install -g grunt-cli
           npm install typescript@2.7.2 --save-dev
-          npm install ng2-smart-table@1.2.1
-          npm install node-sass --force
-          npm install --force
-          npm run ng build
+          npm install
+          npm run build
+          npm run ng build --prod
+        
+      - name: Create WAR file 
+        run: jar -cvf adminui-v1.0.war -C dist .
 
       - name: Upload WAR file as artifact
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v2 
         with:
           name: Admin-UI
-          path: target/
+          path: adminui-v1.0.war  
