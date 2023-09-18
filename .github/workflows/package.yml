@@ -3,16 +3,10 @@ name: Package
 on:
   push:
     branches: [ "develop"]
-    paths-ignore:
-     - target/**
-     - dist/**
      
   pull_request:
      branches: [ "develop" ]
-     paths-ignore:
-     - target/**
-     - dist/**
-
+    
 jobs:
   Package:
     runs-on: ubuntu-latest
