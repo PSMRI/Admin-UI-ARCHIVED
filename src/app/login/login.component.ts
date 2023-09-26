@@ -115,30 +115,30 @@ export class loginContentClass implements OnInit {
 
 
 
-  generateKey(salt, passPhrase) {
-    return CryptoJS.PBKDF2(passPhrase, CryptoJS.enc.Hex.parse(salt), {
-    hasher: CryptoJS.algo.SHA512,
-      keySize: this.keySize / 32,
-      iterations: this._iterationCount
-    })
-  }
+  //generateKey(salt, passPhrase) {
+    //return CryptoJS.PBKDF2(passPhrase, CryptoJS.enc.Hex.parse(salt), {
+    //hasher: CryptoJS.algo.SHA512,
+      //keySize: this.keySize / 32,
+      //iterations: this._iterationCount
+    //})
+  //}
 
 
 
-  encryptWithIvSalt(salt, iv, passPhrase, plainText) {
-    let key = this.generateKey(salt, passPhrase);
-    let encrypted = CryptoJS.AES.encrypt(plainText, key, {
-      iv: CryptoJS.enc.Hex.parse(iv)
-    });
-    return encrypted.ciphertext.toString(CryptoJS.enc.Base64);
-  }
+  //encryptWithIvSalt(salt, iv, passPhrase, plainText) {
+    //let key = this.generateKey(salt, passPhrase);
+    //let encrypted = CryptoJS.AES.encrypt(plainText, key, {
+      //iv: CryptoJS.enc.Hex.parse(iv)
+    //});
+    //return encrypted.ciphertext.toString(CryptoJS.enc.Base64);
+ // }
 
-  encrypt(passPhrase, plainText) {
-    let iv = CryptoJS.lib.WordArray.random(this._ivSize / 8).toString(CryptoJS.enc.Hex);
-    let salt = CryptoJS.lib.WordArray.random(this.keySize / 8).toString(CryptoJS.enc.Hex);
-    let ciphertext = this.encryptWithIvSalt(salt, iv, passPhrase, plainText);
-    return salt + iv + ciphertext;
-  }
+  //encrypt(passPhrase, plainText) {
+    //let iv = CryptoJS.lib.WordArray.random(this._ivSize / 8).toString(CryptoJS.enc.Hex);
+    //let salt = CryptoJS.lib.WordArray.random(this.keySize / 8).toString(CryptoJS.enc.Hex);
+    //let ciphertext = this.encryptWithIvSalt(salt, iv, passPhrase, plainText);
+    //return salt + iv + ciphertext;
+  //}
 
   login(userId: any, password: any, doLogout) {
     bcrypt.hash(this.password, 12, (err, hashedPassword) => {
