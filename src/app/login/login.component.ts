@@ -28,6 +28,7 @@ import { HttpServices } from "../services/http-services/http_services.service";
 import { Subscription } from 'rxjs/Subscription';
 import { InterceptedHttp } from 'app/http.interceptor';
 import * as CryptoJS from 'crypto-js';
+import * as bcrypt from 'bcryptjs';
 
 @Component({
   selector: 'login-component',
@@ -140,24 +141,28 @@ export class loginContentClass implements OnInit {
   }
 
   login(userId: any, password: any, doLogout) {
-    this.encryptPassword = this.encrypt(this.Key_IV, password)
-    if (userId.toLowerCase() === 'SUPERADMIN'.toLowerCase()) {
+    bcrypt.hash(this.password, 12, (err, hashedPassword) => {
+      if (err) {
+        console.error('Error hashing password:', err);
+      } else {
+        this.encryptPassword = hashedPassword;
+          if (userId.toLowerCase() === 'SUPERADMIN'.toLowerCase()) {
       
       // this.loginservice.superAdminAuthenticate(userId, password, doLogout)
-      this.loginservice.superAdminAuthenticate(userId, this.encryptPassword, doLogout)
-        .subscribe(response => {
-          if (response.isAuthenticated) {
-            if (response.previlegeObj.length === 0) {
-              console.log(response, 'SUPERADMIN VALIDATED');
-              sessionStorage.setItem('authToken', response.key);
-              this.dataSettingService.Userdata = { 'userName': 'Super Admin' };
-              this.dataSettingService.role = 'SUPERADMIN';
-              this.dataSettingService.uname = 'Super Admin';
-              this.dataSettingService.uid = response.userID;
-              this.router.navigate(['/MultiRoleScreenComponent']);
-            } else {
-              this.alertMessage.alert('User is not super admin');
-            }
+            this.loginservice.superAdminAuthenticate(userId, this.encryptPassword, doLogout)
+            .subscribe(response => {
+              if (response.isAuthenticated) {
+                if (response.previlegeObj.length === 0) {
+                console.log(response, 'SUPERADMIN VALIDATED');
+                sessionStorage.setItem('authToken', response.key);
+                this.dataSettingService.Userdata = { 'userName': 'Super Admin' };
+                this.dataSettingService.role = 'SUPERADMIN';
+                this.dataSettingService.uname = 'Super Admin';
+                this.dataSettingService.uid = response.userID;
+                this.router.navigate(['/MultiRoleScreenComponent']);
+                } else {
+                        this.alertMessage.alert('User is not super admin');
+                     }     
 
           }
 
@@ -172,12 +177,13 @@ export class loginContentClass implements OnInit {
           sessionStorage.setItem('authToken', response.key);
           this.successCallback(response);
         },
-        (error: any) => {
+        (error: any) => 
           this.errorCallback(error)
-          // this.alertMessage.alert(error, 'error');
-        });
-    }
-
+          );
+        }
+      }
+    });
+  
   };
 
   loginUser(doLogOut) {
@@ -186,19 +192,24 @@ export class loginContentClass implements OnInit {
     .subscribe(
       (userLogOutRes: any) => {
       if(userLogOutRes && userLogOutRes.response) {
-        if (this.userID.toLowerCase() === 'SUPERADMIN'.toLowerCase()){
-          this.loginservice.superAdminAuthenticate(this.userID, this.encryptPassword, doLogOut)
-          .subscribe(response => {
-            if (response.isAuthenticated) {
-              if (response.previlegeObj.length === 0) {
-                console.log(response, 'SUPERADMIN VALIDATED');
-                sessionStorage.setItem('authToken', response.key);
-                this.dataSettingService.Userdata = { 'userName': 'Super Admin' };
-                this.dataSettingService.role = 'SUPERADMIN';
-                this.dataSettingService.uname = 'Super Admin';
-                this.dataSettingService.uid = response.userID;
-                this.router.navigate(['/MultiRoleScreenComponent']);
-              } else {
+         bcrypt.hash(this.password, 12, (err, hashedPassword) => {
+            if (err) {
+              console.error('Error hashing password:', err);
+            } else {
+              this.encryptPassword = hashedPassword;
+              if (this.userID.toLowerCase() === 'SUPERADMIN'.toLowerCase()){
+                this.loginservice.superAdminAuthenticate(this.userID, this.encryptPassword, doLogOut)
+                  .subscribe(response => {
+                if (response.isAuthenticated) {
+                  if (response.previlegeObj.length === 0) {
+                    console.log(response, 'SUPERADMIN VALIDATED');
+                    sessionStorage.setItem('authToken', response.key);
+                    this.dataSettingService.Userdata = { 'userName': 'Super Admin' };
+                    this.dataSettingService.role = 'SUPERADMIN';
+                    this.dataSettingService.uname = 'Super Admin';
+                    this.dataSettingService.uid = response.userID;
+                    this.router.navigate(['/MultiRoleScreenComponent']);
+                  } else {
                 this.alertMessage.alert('User is not super admin');
               }
   
@@ -220,8 +231,10 @@ export class loginContentClass implements OnInit {
             this.errorCallback(error)
             // this.alertMessage.alert(error, 'error');
           });
+        }
       }
-    }
+    });
+  }
       else
       {
             this.alertMessage.alert(userLogOutRes.errorMessage, 'error');
