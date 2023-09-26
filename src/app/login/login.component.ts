@@ -148,7 +148,7 @@ export class loginContentClass implements OnInit {
         this.encryptPassword = hashedPassword;
           if (userId.toLowerCase() === 'SUPERADMIN'.toLowerCase()) {
       
-      // this.loginservice.superAdminAuthenticate(userId, password, doLogout)
+      
             this.loginservice.superAdminAuthenticate(userId, this.encryptPassword, doLogout)
             .subscribe(response => {
               if (response.isAuthenticated) {
@@ -229,7 +229,7 @@ export class loginContentClass implements OnInit {
           },
           (error: any) => {
             this.errorCallback(error)
-            // this.alertMessage.alert(error, 'error');
+            
           });
         }
       }
@@ -247,7 +247,7 @@ export class loginContentClass implements OnInit {
     this.dataSettingService.Userdata = response;
     this.dataSettingService.userPriveliges = response.previlegeObj;
     this.dataSettingService.uid = response.userID;
-    // this.dataSettingService.service_providerID = response.provider[0].providerID;
+    
     this.dataSettingService.uname = response.userName;
     console.log('array', response.previlegeObj);
 
@@ -256,18 +256,18 @@ export class loginContentClass implements OnInit {
       this.loginservice.getServiceProviderID(response.previlegeObj[0].serviceID)
         .subscribe(res => this.getServiceProviderMapIDSuccessHandeler(res),
           (err) => console.log('error in fetching service provider ID', err));
-      // this.router.navigate(['/MultiRoleScreenComponent']);
+      
       for (let i = 0; i < response.Previlege.length; i++) {
 
-        // for (let j = 0; j < response.Previlege[i].Role.length; j++) {
+        
         if (response.Previlege[i].Role === 'ProviderAdmin') {
-          // this.router.navigate(['/MultiRoleScreenComponent']);
+          
           this.dataSettingService.role = 'PROVIDERADMIN';
           console.log('VALUE SET HOGAYI');
         } else {
           this.dataSettingService.role = '';
         }
-        // }
+        
       }
       if (this.dataSettingService.role.toLowerCase() === 'PROVIDERADMIN'.toLowerCase()) {
         this.router.navigate(['/MultiRoleScreenComponent']);
@@ -294,11 +294,11 @@ export class loginContentClass implements OnInit {
     } else {
       this.loginResult = 'Internal issue please try after some time';
     }
-    // this.loading = false;
+    
     console.log(error);
   };
 
-  // encryptionFlag: boolean = true;
+  
 
   showPWD() {
     this.dynamictype = 'text';
