@@ -27,7 +27,7 @@ import { ConfirmationDialogsService } from './../services/dialog/confirmation.se
 import { HttpServices } from "../services/http-services/http_services.service";
 import { Subscription } from 'rxjs/Subscription';
 import { InterceptedHttp } from 'app/http.interceptor';
-//import * as CryptoJS from 'crypto-js';
+import * as CryptoJS from 'crypto-js';
 import * as bcrypt from 'bcryptjs';
 
 @Component({
@@ -115,30 +115,30 @@ export class loginContentClass implements OnInit {
 
 
 
-  //generateKey(salt, passPhrase) {
-    //return CryptoJS.PBKDF2(passPhrase, CryptoJS.enc.Hex.parse(salt), {
-    //hasher: CryptoJS.algo.SHA512,
-      //keySize: this.keySize / 32,
-      //iterations: this._iterationCount
-    //})
-  //}
+  generateKey(salt, passPhrase) {
+    return CryptoJS.PBKDF2(passPhrase, CryptoJS.enc.Hex.parse(salt), {
+    hasher: CryptoJS.algo.SHA512,
+      keySize: this.keySize / 32,
+      iterations: this._iterationCount
+    })
+  }
 
 
 
-  //encryptWithIvSalt(salt, iv, passPhrase, plainText) {
-    //let key = this.generateKey(salt, passPhrase);
-    //let encrypted = CryptoJS.AES.encrypt(plainText, key, {
-      //iv: CryptoJS.enc.Hex.parse(iv)
-    //});
-    //return encrypted.ciphertext.toString(CryptoJS.enc.Base64);
- // }
+  encryptWithIvSalt(salt, iv, passPhrase, plainText) {
+    let key = this.generateKey(salt, passPhrase);
+    let encrypted = CryptoJS.AES.encrypt(plainText, key, {
+      iv: CryptoJS.enc.Hex.parse(iv)
+    });
+    return encrypted.ciphertext.toString(CryptoJS.enc.Base64);
+  }
 
-  //encrypt(passPhrase, plainText) {
-    //let iv = CryptoJS.lib.WordArray.random(this._ivSize / 8).toString(CryptoJS.enc.Hex);
-    //let salt = CryptoJS.lib.WordArray.random(this.keySize / 8).toString(CryptoJS.enc.Hex);
-    //let ciphertext = this.encryptWithIvSalt(salt, iv, passPhrase, plainText);
-    //return salt + iv + ciphertext;
-  //}
+  encrypt(passPhrase, plainText) {
+    let iv = CryptoJS.lib.WordArray.random(this._ivSize / 8).toString(CryptoJS.enc.Hex);
+    let salt = CryptoJS.lib.WordArray.random(this.keySize / 8).toString(CryptoJS.enc.Hex);
+    let ciphertext = this.encryptWithIvSalt(salt, iv, passPhrase, plainText);
+    return salt + iv + ciphertext;
+  }
 
   login(userId: any, password: any, doLogout) {
     bcrypt.hash(this.password, 12, (err, hashedPassword) => {
@@ -161,8 +161,8 @@ export class loginContentClass implements OnInit {
                 this.dataSettingService.uid = response.userID;
                 this.router.navigate(['/MultiRoleScreenComponent']);
                 } else {
-                        this.alertMessage.alert('User is not super admin');
-                     }     
+                this.alertMessage.alert('User is not super admin');
+            }
 
           }
 
@@ -183,7 +183,6 @@ export class loginContentClass implements OnInit {
         }
       }
     });
-  
   };
 
   loginUser(doLogOut) {
@@ -229,7 +228,6 @@ export class loginContentClass implements OnInit {
           },
           (error: any) => {
             this.errorCallback(error)
-            
           });
         }
       }
@@ -247,7 +245,6 @@ export class loginContentClass implements OnInit {
     this.dataSettingService.Userdata = response;
     this.dataSettingService.userPriveliges = response.previlegeObj;
     this.dataSettingService.uid = response.userID;
-    
     this.dataSettingService.uname = response.userName;
     console.log('array', response.previlegeObj);
 
@@ -256,12 +253,10 @@ export class loginContentClass implements OnInit {
       this.loginservice.getServiceProviderID(response.previlegeObj[0].serviceID)
         .subscribe(res => this.getServiceProviderMapIDSuccessHandeler(res),
           (err) => console.log('error in fetching service provider ID', err));
-      
       for (let i = 0; i < response.Previlege.length; i++) {
 
-        
         if (response.Previlege[i].Role === 'ProviderAdmin') {
-          
+         
           this.dataSettingService.role = 'PROVIDERADMIN';
           console.log('VALUE SET HOGAYI');
         } else {
@@ -294,7 +289,7 @@ export class loginContentClass implements OnInit {
     } else {
       this.loginResult = 'Internal issue please try after some time';
     }
-    
+   
     console.log(error);
   };
 
