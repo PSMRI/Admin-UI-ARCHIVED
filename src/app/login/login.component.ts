@@ -27,7 +27,7 @@ import { ConfirmationDialogsService } from './../services/dialog/confirmation.se
 import { HttpServices } from "../services/http-services/http_services.service";
 import { Subscription } from 'rxjs/Subscription';
 import { InterceptedHttp } from 'app/http.interceptor';
-import * as CryptoJS from 'crypto-js';
+//import * as CryptoJS from 'crypto-js';
 import * as bcrypt from 'bcryptjs';
 
 @Component({
