@@ -25,6 +25,7 @@ import { ConfirmationDialogsService } from '../services/dialog/confirmation.serv
 import { NgForm } from '@angular/forms';
 import { ResetUserPasswordService } from '../services/ProviderAdminServices/reset-user-password.service';
 import * as CryptoJS from 'crypto-js';
+import * as bcrypt from 'bcryptjs'; 
 
 @Component({
   selector: 'app-reset-user-password',
@@ -51,6 +52,7 @@ export class ResetUserPasswordComponent implements OnInit {
   _ivSize: any;
   _iterationCount: any;
   encryptPassword: any;
+  SALT_ROUNDS: number = 12;
 
   /*Patter*/
   passwordPattern = /^(?=.*[0-9])(?=.*[A-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,12}$/;
@@ -142,12 +144,16 @@ export class ResetUserPasswordComponent implements OnInit {
 
   /*Reset Password*/
   resetPassword(userName, password) {
+    bcrypt.hash(password, this.SALT_ROUNDS, (err, hashedPassword) => {
+      if (err) {
+        console.error('Error hashing password:', err);
+        return;
+      }
+
     let resetObj = {
       "userName": userName,
       "password": this.encrypt(this.Key_IV, password),
-      // "password": password,
-      // this.encryptPassword = this.encrypt(this.Key_IV, password)
-      //"statusID": 1
+      
     }
     console.log("resetObj", resetObj);
     this.resetUserPasswordService.resetUserPassword(resetObj)
@@ -160,5 +166,6 @@ export class ResetUserPasswordComponent implements OnInit {
       }, err => {
         console.log('Error', err);
       });
+    });
   }
 }
