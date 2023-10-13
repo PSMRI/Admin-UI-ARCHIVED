@@ -1,3 +1,24 @@
+/*
+* AMRIT – Accessible Medical Records via Integrated Technology 
+* Integrated EHR (Electronic Health Records) Solution 
+*
+* Copyright (C) "Piramal Swasthya Management and Research Institute" 
+*
+* This file is part of AMRIT.
+*
+* This program is free software: you can redistribute it and/or modify
+* it under the terms of the GNU General Public License as published by
+* the Free Software Foundation, either version 3 of the License, or
+* (at your option) any later version.
+*
+* This program is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU General Public License for more details.
+*
+* You should have received a copy of the GNU General Public License
+* along with this program.  If not, see https://www.gnu.org/licenses/.
+*/
 import { Injectable } from '@angular/core';
 import { ConfigService } from '../config/config.service';
 import { InterceptedHttp } from '../../http.interceptor';
@@ -29,7 +50,7 @@ export class ProcedureMasterServiceService {
     this._getProcedureListURL = this.providerAdmin_Base_Url + 'labModule/fetchProcedureMaster/';
     this._toggleProcedureURL = this.providerAdmin_Base_Url + 'labModule/updateProcedureStatus';
     this._updateProcedureURL = this.providerAdmin_Base_Url + 'labModule/updateProcedureMaster';
-    this._iotProcedureURL = this.providerAdmin_Base_Url + 'iotController/getIOTProcedure';
+    this._iotProcedureURL = this.providerAdmin_Base_Url + 'diagnostics/getDiagnosticProcedure';
   }
 
   getCurrentProcedures(providerServiceMapID) {
@@ -69,7 +90,7 @@ export class ProcedureMasterServiceService {
     return Observable.throw(error.json());
   }
 
-  getIOTProcedure() {
+  getDiagnosticProcedure() {
     return this.http.post(this._iotProcedureURL, {})
     .map(this.handleSuccess)
     .catch(this.handleError);

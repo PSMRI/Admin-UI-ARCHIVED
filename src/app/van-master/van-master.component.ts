@@ -1,3 +1,24 @@
+/*
+* AMRIT – Accessible Medical Records via Integrated Technology 
+* Integrated EHR (Electronic Health Records) Solution 
+*
+* Copyright (C) "Piramal Swasthya Management and Research Institute" 
+*
+* This file is part of AMRIT.
+*
+* This program is free software: you can redistribute it and/or modify
+* it under the terms of the GNU General Public License as published by
+* the Free Software Foundation, either version 3 of the License, or
+* (at your option) any later version.
+*
+* This program is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU General Public License for more details.
+*
+* You should have received a copy of the GNU General Public License
+* along with this program.  If not, see https://www.gnu.org/licenses/.
+*/
 import { Component, OnInit } from '@angular/core';
 import { ProviderAdminRoleService } from "../services/ProviderAdminServices/state-serviceline-role.service";
 import { dataService } from '../services/dataService/data.service';
@@ -172,9 +193,10 @@ export class VanComponent implements OnInit {
         this.availableVanTypes.filter((vanTypes) => {
             if (this.serviceline.serviceName == "TM" && vanTypes.vanTypeID == 3) {
                 this.filteredVanTypes.push(vanTypes);
-            } else {
-                if (this.serviceline.serviceName == "MMU" && vanTypes.vanTypeID != 3)
+            } else if (this.serviceline.serviceName == "MMU" && vanTypes.vanTypeID != 3){
                     this.filteredVanTypes.push(vanTypes);
+            } else if (this.serviceline.serviceName == "HWC" && vanTypes.vanTypeID != 3) {
+                this.filteredVanTypes.push(vanTypes);
             }
         })
     }
@@ -243,9 +265,9 @@ export class VanComponent implements OnInit {
         this.vanObj.providerServiceMapID = this.searchStateID.providerServiceMapID;
         this.vanObj.vanTypeID = formValues.vanTypeID.split("-")[0];
         this.vanObj.vanType = formValues.vanTypeID.split("-")[1];
-        this.vanObj.swymedDomain = formValues.domain;
-        this.vanObj.swymedEmail = formValues.sEmail;
-        this.vanObj.swymedID = formValues.sID;
+        this.vanObj.videoConsultationDomain = formValues.domain;
+        this.vanObj.videoConsultationEmail = formValues.sEmail;
+        this.vanObj.videoConsultationID = formValues.sID;
         this.vanObj.createdBy = this.createdBy;
         this.checkDuplicates(this.vanObj);
         //this.vanList.push(this.vanObj);
@@ -362,9 +384,9 @@ export class VanComponent implements OnInit {
         this.vanID = van.vanID;
         this.vanName = van.vanName
         this.vehicalNo = van.vehicalNo;
-        this.domain = van.swymedDomain;
-        this.sEmail = van.swymedEmail;
-        this.sID = van.swymedID;
+        this.domain = van.videoConsultationDomain;
+        this.sEmail = van.videoConsultationEmail;
+        this.sID = van.videoConsultationID;
         this.vanTypeID = van.vanTypeID + "-" + van.vanType;
         this.stateID = van.stateID;
         // this.district = van.districtID;
@@ -385,9 +407,9 @@ export class VanComponent implements OnInit {
         this.dataObj.parkingPlaceID = this.parking_place.parkingPlaceID;
         this.dataObj.stateID = this.stateID;
         this.dataObj.providerServiceMapID = this.providerServiceMapID;
-        this.dataObj.swymedDomain = van.domain;
-        this.dataObj.swymedEmail = van.sEmail;
-        this.dataObj.swymedID = van.sID;
+        this.dataObj.videoConsultationDomain = van.domain;
+        this.dataObj.videoConsultationEmail = van.sEmail;
+        this.dataObj.videoConsultationID = van.sID;
         this.dataObj.modifiedBy = this.createdBy;
         this.vanMasterService.updateVanData(this.dataObj).subscribe(response => this.updateHandler(response));
 

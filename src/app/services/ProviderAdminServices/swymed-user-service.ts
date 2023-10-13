@@ -1,3 +1,24 @@
+/*
+* AMRIT – Accessible Medical Records via Integrated Technology 
+* Integrated EHR (Electronic Health Records) Solution 
+*
+* Copyright (C) "Piramal Swasthya Management and Research Institute" 
+*
+* This file is part of AMRIT.
+*
+* This program is free software: you can redistribute it and/or modify
+* it under the terms of the GNU General Public License as published by
+* the Free Software Foundation, either version 3 of the License, or
+* (at your option) any later version.
+*
+* This program is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU General Public License for more details.
+*
+* You should have received a copy of the GNU General Public License
+* along with this program.  If not, see https://www.gnu.org/licenses/.
+*/
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
@@ -15,7 +36,7 @@ export class SwymedUserConfigurationService {
     getMappedUserDetails: any;
     getAllDesignationsUrl: any;
     getUserNameUrl: any;
-    getSwymedDomainUrl: any;
+    getVideoConsultationDomainUrl: any;
     saveSwymedUserDetailsUrl: any;
     updateUserDetailsUrl: any;
     mappingActivationDeactivationUrl: any;
@@ -28,7 +49,7 @@ export class SwymedUserConfigurationService {
         this.getMappedUserDetails = this.providerAdmin_base_url + 'swymed/getmappedUsers/';
         this.getAllDesignationsUrl = this.providerAdmin_base_url + 'm/getDesignation';
         this.getUserNameUrl = this.providerAdmin_base_url + '/swymed/getunmappedUser/';
-        this.getSwymedDomainUrl = this.providerAdmin_base_url + 'swymed/getdomain/';
+        this.getVideoConsultationDomainUrl = this.providerAdmin_base_url + 'swymed/getdomain/';
         this.saveSwymedUserDetailsUrl = this.providerAdmin_base_url + '/swymed/createUser';
         this.updateUserDetailsUrl = this.providerAdmin_base_url + 'swymed/editUser';
         this.mappingActivationDeactivationUrl = this.providerAdmin_base_url + '/swymed/deleteUser/';
@@ -52,9 +73,9 @@ export class SwymedUserConfigurationService {
             .map(this.handleSuccess)
             .catch(this.handleError)
     }
-    getSwymedDomain(serviceProviderID) {
+    getVideoConsultationDomain(serviceProviderID) {
         return this.httpSecurity
-            .post(this.getSwymedDomainUrl + serviceProviderID , { })
+            .post(this.getVideoConsultationDomainUrl + serviceProviderID , { })
             .map(this.handleSuccess)
             .catch(this.handleError)
     }
@@ -70,9 +91,9 @@ export class SwymedUserConfigurationService {
         .map(this.successHandler)
         .catch(this.handleError)
     }
-    mappingActivationDeactivation(userSwymedMapID, flag, modifiedBy) {
+    mappingActivationDeactivation(userVideoConsultationMapID, flag, modifiedBy) {
         return this.httpSecurity
-        .get(this.mappingActivationDeactivationUrl + userSwymedMapID + '/' + flag + '/' + modifiedBy, {})
+        .get(this.mappingActivationDeactivationUrl + userVideoConsultationMapID + '/' + flag + '/' + modifiedBy, {})
         .map(this.handleSuccess)
         .catch(this.handleError)
     }

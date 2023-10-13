@@ -1,3 +1,24 @@
+/*
+* AMRIT – Accessible Medical Records via Integrated Technology 
+* Integrated EHR (Electronic Health Records) Solution 
+*
+* Copyright (C) "Piramal Swasthya Management and Research Institute" 
+*
+* This file is part of AMRIT.
+*
+* This program is free software: you can redistribute it and/or modify
+* it under the terms of the GNU General Public License as published by
+* the Free Software Foundation, either version 3 of the License, or
+* (at your option) any later version.
+*
+* This program is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU General Public License for more details.
+*
+* You should have received a copy of the GNU General Public License
+* along with this program.  If not, see https://www.gnu.org/licenses/.
+*/
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ProviderAdminRoleService } from "../services/ProviderAdminServices/state-serviceline-role.service";
 import { dataService } from '../services/dataService/data.service';
@@ -128,7 +149,7 @@ export class DrugGroupComponent implements OnInit {
       this.drugGroupObj.drugGroup = (values.drugGroup !== undefined && values.drugGroup !== null) ? values.drugGroup.trim() : null;
       this.drugGroupObj.drugGroupDesc = (values.drugGroupDesc !== undefined && values.drugGroupDesc !== null) ? values.drugGroupDesc.trim() : null;
 
-      this.drugGroupObj.serviceProviderID = this.service_provider_id.trim;
+      this.drugGroupObj.serviceProviderID = this.service_provider_id;
       this.drugGroupObj.createdBy = this.createdBy;
       this.checkDuplicates(this.drugGroupObj);
   }
@@ -213,13 +234,21 @@ export class DrugGroupComponent implements OnInit {
     this.stateID = "";
   }
   editDrugGroup(drug) {
-    this.drugGroupID = (drug.drugGroupID !== undefined && drug.drugGroupID !== null) ? drug.drugGroupID.trim() : null;
-    this.drugGroup = (drug.drugGroup !== undefined && drug.drugGroup !== null) ? drug.drugGroup.trim() : null;
-    this.drugGroupDesc = (drug.drugGroupDesc !== undefined && drug.drugGroupDesc !== null) ?  drug.drugGroupDesc.trim() : null;
+    this.drugGroupID = ( drug.drugGroupID !==null && drug.drugGroupID !==undefined) ? parseInt(drug.drugGroupID):null;
+    this.drugGroup = (typeof drug.drugGroup === 'string' && drug.drugGroup.trim() !== '') ? drug.drugGroup.trim() : null;
+    this.drugGroupDesc = (typeof drug.drugGroupDesc === 'string' && drug.drugGroupDesc.trim() !== '') ?  drug.drugGroupDesc.trim() : null;
     //this.stateID = drug.m_providerServiceMapping.state.stateID;
     this.editable = true;
     this.drugGroupToEdit = drug.drugGroup;
   }
+  // editDrugGroup(drug) {
+  //   this.drugGroupID = (drug.drugGroupID !== undefined && drug.drugGroupID !== null) ? drug.drugGroupID.trim() : null;
+  //   this.drugGroup = (drug.drugGroup !== undefined && drug.drugGroup !== null) ? drug.drugGroup.trim() : null;
+  //   this.drugGroupDesc = (drug.drugGroupDesc !== undefined && drug.drugGroupDesc !== null) ?  drug.drugGroupDesc.trim() : null;
+  //   //this.stateID = drug.m_providerServiceMapping.state.stateID;
+  //   this.editable = true;
+  //   this.drugGroupToEdit = drug.drugGroup;
+  // }
 
   updateDrugGroup(drugGroup) {
     if (drugGroup.drugGroup !== undefined && drugGroup.drugGroup !== null && (drugGroup.drugGroup.trim() === "")) {
@@ -229,7 +258,7 @@ export class DrugGroupComponent implements OnInit {
 
     else {
       this.dataObj = {};
-      this.dataObj.drugGroupID = (this.drugGroupID !== undefined && this.drugGroupID !== null) ? this.drugGroupID.trim() : null;
+      this.dataObj.drugGroupID = (this.drugGroupID !== undefined && this.drugGroupID !== null) ? this.drugGroupID : null;
       this.dataObj.drugGroup = (drugGroup.drugGroup !== undefined && drugGroup.drugGroup !== null) ? drugGroup.drugGroup.trim() : null;
       this.dataObj.drugGroupDesc = (drugGroup.drugGroupDesc !== undefined && drugGroup.drugGroupDesc !== null) ? drugGroup.drugGroupDesc.trim() : null;
       //this.dataObj.providerServiceMapID = drugGroup.providerServiceMapID;

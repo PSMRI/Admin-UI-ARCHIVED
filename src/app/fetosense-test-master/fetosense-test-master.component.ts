@@ -1,3 +1,24 @@
+/*
+* AMRIT – Accessible Medical Records via Integrated Technology 
+* Integrated EHR (Electronic Health Records) Solution 
+*
+* Copyright (C) "Piramal Swasthya Management and Research Institute" 
+*
+* This file is part of AMRIT.
+*
+* This program is free software: you can redistribute it and/or modify
+* it under the terms of the GNU General Public License as published by
+* the Free Software Foundation, either version 3 of the License, or
+* (at your option) any later version.
+*
+* This program is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU General Public License for more details.
+*
+* You should have received a copy of the GNU General Public License
+* along with this program.  If not, see https://www.gnu.org/licenses/.
+*/
 import { Component, OnInit } from '@angular/core';
 import { dataService } from 'app/services/dataService/data.service';
 import { ConfirmationDialogsService } from 'app/services/dialog/confirmation.service';
@@ -36,7 +57,7 @@ export class FetosenseTestMasterComponent implements OnInit {
   addedFetosenseTests: any = [];
   fetosenseTest: any ={};
   confirmMessage: any;
-  fetosenseTestID : any;
+  foetalMonitorTestID : any;
   searchTest: any;
   state: any;
   constructor(public providerAdminTestMasterService: ProviderAdminFetosenseTestMasterService,
@@ -178,12 +199,12 @@ export class FetosenseTestMasterComponent implements OnInit {
       this.showTestCreationForm = true;
       this.showWorklist = false;
       this.selectedTest = roleObj.testName;
-      this.fetosenseTestID = roleObj.fetosenseTestID;
+      this.foetalMonitorTestID = roleObj.foetalMonitorTestID;
       this.showFetosenseTestMaster= false;
     }
     updateTestChanges(){
       let fetosenseTest = {
-        "fetosenseTestID": this.fetosenseTestID,
+        "foetalMonitorTestID": this.foetalMonitorTestID,
         'testName': (this.test !== undefined && this.test !== null) ? this.test.trim() : null,
         'testDesc': (this.description !== undefined && this.description !== null) ? this.description.trim(): null,
         'createdBy': this.commonDataService.uname,
@@ -203,7 +224,7 @@ export class FetosenseTestMasterComponent implements OnInit {
     }
     deleteTest(fetoID, flag){
       let fetosenseTest = {
-        "fetosenseTestID": fetoID,
+        "foetalMonitorTestID": fetoID,
         "deleted": flag
       } 
       if (flag) {
