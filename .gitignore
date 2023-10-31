@@ -5,6 +5,7 @@ dist
 tmp
 out-tsc
 target/
+package-lock.json
 # dependencies
 /node_modules
 
@@ -46,6 +47,8 @@ config.service.ts
 config.json
 *.properties
 
+
+package-lock.json
 src/assets/git-version.json
 package-lock.json
 package-lock.json
