@@ -15,9 +15,9 @@ This microservice is built on Java, Spring boot framework and MySQL DB.
 
 Prerequisites 
 * Admin-API module should be running
-* JDK 1.8
+* JDK 17
 * Maven 
-* Nodejs v8.9.0
+* Nodejs v16
 * Springboot V2
 * MySQL
 
