@@ -17,7 +17,7 @@ Prerequisites
 * Admin-API module should be running
 * JDK 1.8
 * Maven 
-* Nodejs
+* Nodejs v8.9.0
 * Springboot V2
 * MySQL
 
@@ -38,8 +38,11 @@ Run the development server.
 * npm start
 
 ## Configuration
-The admin module can be configured by editing the config.js file. This file contains all of the settings for the module, such as the database connection string, the user authentication mechanism, and the role hierarchy.
+The available profiles include dev, local, test, and ci.
+Refer to `src/environments/environment.ci.template` file and ensure that the right environment variables are set for the build.
 
+Packing with `ci` profile calls `build-ci` script in `package.json`.
+It creates a `environment.ci.ts` file with all environment variables used in the generated build.
 
 ## Usage
 All the features have been exposed as REST endpoints.
@@ -79,3 +82,11 @@ Before running the tests make sure you are serving the app via `ng serve`.
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
 -->
+
+
+## Building war files
+
+To build deployable war files
+```bash
+mvn -B package --file pom.xml -P <profile_name>
+```

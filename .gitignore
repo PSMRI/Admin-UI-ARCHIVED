@@ -54,3 +54,6 @@ package-lock.json
 package-lock.json
 src/assets/git-version.json
 package-lock.json
+
+src/environments/environment.local.ts
+src/environments/environment.ci.ts
