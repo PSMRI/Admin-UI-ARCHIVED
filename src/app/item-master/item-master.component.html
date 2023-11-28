@@ -149,7 +149,7 @@
     </div>
     
     <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
-      <md-input-container class="width100" PanWithCopyPaste>
+      <md-input-container class="width100" appDotAllow>
         <input mdInput placeholder="Item Code" [(ngModel)]="code" name="code" minlength="1" maxlength="15" (change)="checkCodeExistance(code)"
           #itemCode="ngModel" required>
         <md-hint *ngIf="itemCode.touched || itemCode.dirty ">
