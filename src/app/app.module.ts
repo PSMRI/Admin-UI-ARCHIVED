@@ -317,6 +317,7 @@ import { MyMobileNumberWithCopyPaste } from './directives/MobileNumber/myMobileN
 import { DataMappingBlockSubcenterComponent } from './data-mapping-block-subcenter/data-mapping-block-subcenter.component';
 import { BlockSubcenterMappingService } from './services/ProviderAdminServices/block-subcenter-mapping-service';
 import { ServicelineCdssMapping } from './serviceline-cdss-mapping/servicelineCdssMapping.component';
+import { DotallowDirective } from './directives/dotallow/dotallow';
 
 @NgModule({
   declarations: [
@@ -419,6 +420,7 @@ import { ServicelineCdssMapping } from './serviceline-cdss-mapping/servicelineCd
     MyMobileNumberWithCopyPaste,
     MyProviderNameWithCopyPaste,
     DataMappingBlockSubcenterComponent,
+    DotallowDirective
     
   ],
 
