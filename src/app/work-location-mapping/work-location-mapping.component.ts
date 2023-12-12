@@ -775,7 +775,7 @@ export class WorkLocationMappingComponent implements OnInit {
                 'roleID1': objectToBeAdded.role[a].roleID,
                 'roleName': objectToBeAdded.role[a].roleName,
                 'screenName': objectToBeAdded.role[a].screenName,
-                'isSanjeevani': (objectToBeAdded.serviceline.serviceName === "HWC" && objectToBeAdded.role[a].roleName.toLowerCase() === "nurse") ? true : false
+                'isSanjeevani': (objectToBeAdded.serviceline.serviceName === "HWC" && objectToBeAdded.role[a].roleName.toLowerCase() === "nurse" && this.isSanjeevani) ? true : false
                 
               }
               // roleArray.push(obj);
@@ -794,7 +794,7 @@ export class WorkLocationMappingComponent implements OnInit {
                     'roleID1': objectToBeAdded.role[i].roleID,
                     'roleName': objectToBeAdded.role[i].roleName,
                     'screenName': objectToBeAdded.role[i].screenName,
-                    'isSanjeevani': (objectToBeAdded.serviceline.serviceName === "HWC" && objectToBeAdded.role[i].roleName.toLowerCase() === "nurse") ? true : false
+                    'isSanjeevani': (objectToBeAdded.serviceline.serviceName === "HWC" && objectToBeAdded.role[i].roleName.toLowerCase() === "nurse" && this.isSanjeevani ) ? true : false
                   }
                   // roleArray.push(obj);
                   this.setWorkLocationObject(objectToBeAdded, obj, false, false);
@@ -824,7 +824,7 @@ export class WorkLocationMappingComponent implements OnInit {
               'roleID1': objectToBeAdded.role[a].roleID,
               'roleName': objectToBeAdded.role[a].roleName,
               'screenName': objectToBeAdded.role[a].screenName,
-              'isSanjeevani': (objectToBeAdded.serviceline.serviceName != "HWC" && objectToBeAdded.role[a].roleName.toLowerCase() != "nurse") ? false:true
+              'isSanjeevani': (objectToBeAdded.serviceline.serviceName != "HWC" && objectToBeAdded.role[a].roleName.toLowerCase() != "nurse" && !this.isSanjeevani) ? false:true
             }
             // roleArray.push(obj);
             this.setWorkLocationObject(objectToBeAdded, obj, false, false);
@@ -842,7 +842,7 @@ export class WorkLocationMappingComponent implements OnInit {
                   'roleID1': objectToBeAdded.role[i].roleID,
                   'roleName': objectToBeAdded.role[i].roleName,
                   'screenName': objectToBeAdded.role[i].screenName,
-                  'isSanjeevani': (objectToBeAdded.serviceline.serviceName != "HWC" && objectToBeAdded.role[i].roleName.toLowerCase() != "nurse") ? false : true
+                  'isSanjeevani': (objectToBeAdded.serviceline.serviceName != "HWC" && objectToBeAdded.role[i].roleName.toLowerCase() != "nurse" && !this.isSanjeevani) ? false : true
                 }
 
                 // roleArray.push(obj);
@@ -2415,11 +2415,11 @@ let result = false;
   }
 
   onESanjeevaniChange(event: any) {
-    if (!event.checked) {
-      this.isSanjeevani = false;
+    if (event.checked) {
+      this.isSanjeevani = true;
     }
     else {
-      this.isSanjeevani = true;
+      this.isSanjeevani = false;
     }
   }
 //   allowSingleTimeHWC(serviceLine,userID)
