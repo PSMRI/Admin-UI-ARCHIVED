@@ -46,13 +46,13 @@ export class SwymedUserConfigurationService {
         private httpSecurity: SecurityInterceptedHttp) {
 
         this.providerAdmin_base_url = this.basePaths.getAdminBaseUrl();
-        this.getMappedUserDetails = this.providerAdmin_base_url + 'swymed/getmappedUsers/';
+        this.getMappedUserDetails = this.providerAdmin_base_url + 'videoConsultation/getmappedUsers/';
         this.getAllDesignationsUrl = this.providerAdmin_base_url + 'm/getDesignation';
-        this.getUserNameUrl = this.providerAdmin_base_url + '/swymed/getunmappedUser/';
-        this.getVideoConsultationDomainUrl = this.providerAdmin_base_url + 'swymed/getdomain/';
-        this.saveSwymedUserDetailsUrl = this.providerAdmin_base_url + '/swymed/createUser';
-        this.updateUserDetailsUrl = this.providerAdmin_base_url + 'swymed/editUser';
-        this.mappingActivationDeactivationUrl = this.providerAdmin_base_url + '/swymed/deleteUser/';
+        this.getUserNameUrl = this.providerAdmin_base_url + '/videoConsultation/getunmappedUser/';
+        this.getVideoConsultationDomainUrl = this.providerAdmin_base_url + 'videoConsultation/getdomain/';
+        this.saveSwymedUserDetailsUrl = this.providerAdmin_base_url + '/videoConsultation/createUser';
+        this.updateUserDetailsUrl = this.providerAdmin_base_url + 'videoConsultation/editUser';
+        this.mappingActivationDeactivationUrl = this.providerAdmin_base_url + '/videoConsultation/deleteUser/';
     }
 
     getSwymedUserDetails(serviceProviderID) {
