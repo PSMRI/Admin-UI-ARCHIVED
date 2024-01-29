@@ -38,7 +38,7 @@ import * as CryptoJS from 'crypto-js';
 export class loginContentClass implements OnInit {
   model: any = {};
   userID: any;
-  password: any;
+  code: any;
   serviceProviderID: any;
   status: any;
   dynamictype: any = 'password';
@@ -139,8 +139,8 @@ export class loginContentClass implements OnInit {
     return salt + iv + ciphertext;
   }
 
-  login(userId: any, password: any, doLogout) {
-    this.encryptPassword = this.encrypt(this.Key_IV, password)
+  login(userId: any, tempCode: any, doLogout) {
+    this.encryptPassword = this.encrypt(this.Key_IV, tempCode)
     if (userId.toLowerCase() === 'SUPERADMIN'.toLowerCase()) {
       
       // this.loginservice.superAdminAuthenticate(userId, password, doLogout)

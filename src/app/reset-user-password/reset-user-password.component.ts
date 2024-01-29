@@ -141,10 +141,10 @@ export class ResetUserPasswordComponent implements OnInit {
 
 
   /*Reset Password*/
-  resetPassword(userName, password) {
+  resetPassword(userName, code) {
     let resetObj = {
       "userName": userName,
-      "password": this.encrypt(this.Key_IV, password),
+      "password": this.encrypt(this.Key_IV, code),
       // "password": password,
       // this.encryptPassword = this.encrypt(this.Key_IV, password)
       //"statusID":  1
