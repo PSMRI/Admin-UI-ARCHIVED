@@ -147,7 +147,7 @@ export class ResetUserPasswordComponent implements OnInit {
       "password": this.encrypt(this.Key_IV, password),
       // "password": password,
       // this.encryptPassword = this.encrypt(this.Key_IV, password)
-      //"statusID": 1
+      //"statusID":  1
     }
     console.log("resetObj", resetObj);
     this.resetUserPasswordService.resetUserPassword(resetObj)
