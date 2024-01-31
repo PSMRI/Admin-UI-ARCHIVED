@@ -36,7 +36,7 @@ export class ResetUserPasswordComponent implements OnInit {
   /*NgModel*/
   serviceProviderID: any;
   user: any;
-  password: any;
+  code: any;
 
   /*Arrays*/
   userNamesList: any = [];
@@ -141,13 +141,13 @@ export class ResetUserPasswordComponent implements OnInit {
 
 
   /*Reset Password*/
-  resetPassword(userName, password) {
+  resetPassword(userName, code) {
     let resetObj = {
       "userName": userName,
-      "password": this.encrypt(this.Key_IV, password),
+      "password": this.encrypt(this.Key_IV, code),
       // "password": password,
       // this.encryptPassword = this.encrypt(this.Key_IV, password)
-      //"statusID": 1
+      //"statusID":  1
     }
     console.log("resetObj", resetObj);
     this.resetUserPasswordService.resetUserPassword(resetObj)
@@ -155,7 +155,7 @@ export class ResetUserPasswordComponent implements OnInit {
         this.alertService.alert(response.response);
         this.tableMode = false;
         this.user = null;
-        this.password = null;
+        this.code = null;
         this.userDetails = null;
       }, err => {
         console.log('Error', err);
