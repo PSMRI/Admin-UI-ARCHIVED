@@ -107,7 +107,7 @@ export class WrapupTimeConfigurationService {
     let result = [];
     if (response.json().data) {
         result = response.json().data.filter(function (item) {
-            if (item.serviceID == 3 ||item.serviceID == 6 ||item.serviceID == 1) {
+            if (item.serviceID == 3 ||item.serviceID == 6 ||item.serviceID == 1 || item.serviceID == 10) {
                 return item;
             }
         });
