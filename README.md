@@ -1,3 +1,7 @@
+# ❗❗❗ NOTICE ❗❗❗
+
+A new version of the repository is available here [PSMRI/Admin-UI](https://github.com/PSMRI/Admin-UI)
+
 # AMRIT - Admin 
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)  ![branch parameter](https://github.com/PSMRI/Admin-UI/actions/workflows/sast-and-package.yml/badge.svg)
 
